@@ -40,9 +40,9 @@ abstract class House {
 }
 
 class MyHouse extends House {
-  super:House; 
+  super: House; 
 
-  get getParentKey():Key {
+  get getParentKey(): Key {
     return key;
   }
   
