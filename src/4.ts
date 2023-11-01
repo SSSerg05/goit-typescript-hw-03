@@ -1,6 +1,8 @@
 class Key {
   constructor(private signature: number = 0) {
     this.signature = Math.random()*10;
+    console.log(this.signature);
+    
   }
 
   public getSignature = ():number => {
@@ -25,6 +27,7 @@ abstract class House {
   ) { }
   
   public comeIn = (person:Person) => {
+
     if (this.door) {
       this.tenants.push(person);
 
@@ -37,9 +40,19 @@ abstract class House {
 }
 
 class MyHouse extends House {
-  super:House;
+  private myKey: Key;
 
+  constructor(key: Key, ...args ){
+    super(key, ...args)
+    this.myKey = key;
+  }
+  
   openDoor(key: Key): void {
+    if (this.myKey.getSignature() !== key.getSignature()) {
+      console.log('Key wrong!');
+      return
+    }
+
     if (key.getSignature()) {
       this.door = true;
       console.log(`Key: ${key.getSignature()} open the door`);
@@ -48,9 +61,10 @@ class MyHouse extends House {
 }
 
 const key = new Key();
+const key2 = new Key();
 
 const house = new MyHouse(key);
-const person = new Person(key);
+const person = new Person(key2);
 
 house.openDoor(person.getKey());
 
