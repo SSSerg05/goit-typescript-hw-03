@@ -40,23 +40,24 @@ abstract class House {
 }
 
 class MyHouse extends House {
-  private myKey: Key;
+  super:House; 
 
-  constructor(key: Key, ...args ){
-    super(key, ...args)
-    this.myKey = key;
+  get getParentKey():Key {
+    return key;
   }
   
   openDoor(key: Key): void {
-    if (this.myKey.getSignature() !== key.getSignature()) {
+    const parentKey: Key = this.getParentKey;
+    
+    if (!key.getSignature()) return;
+
+    if (parentKey.getSignature() !== key.getSignature()) {
       console.log('Key wrong!');
       return
     }
 
-    if (key.getSignature()) {
-      this.door = true;
-      console.log(`Key: ${key.getSignature()} open the door`);
-    }
+    this.door = true;
+    console.log(`Key: ${key.getSignature()} open the door`);
   }
 }
 
