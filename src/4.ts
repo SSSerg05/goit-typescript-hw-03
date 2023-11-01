@@ -52,7 +52,7 @@ class MyHouse extends House {
     if (!key.getSignature()) return;
 
     if (parentKey.getSignature() !== key.getSignature()) {
-      console.log('Key wrong!');
+      console.log('Key wrong! Door not open!');
       return
     }
 
